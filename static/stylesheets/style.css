@@ -59,6 +59,16 @@ body.error-404 {
   border-radius: 32px;
 }
 
+.logout {
+  font-size: 13px;
+  font-weight: bold;
+  color: #66757f;
+}
+
+.logout:hover {
+  color: #1c94e0;
+}
+
 ul.nav.navbar-nav {
   align-items: center;
 }
