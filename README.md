@@ -43,11 +43,11 @@ source venv/bin/activate
 ```console
 (venv) createdb warbler-test
 ```
-- To run test for a specific file or all files. 
+- Run test for a specific or all files
 ```console
 (venv) python3 -m unittest <FILE-NAME>
 (venv) python3 -m unittest
 ```
 ## Authors
 - Dan Benson
-- [Sammy Au](https://github.com/samau3).
+- [Sammy Au](https://github.com/samau3)
