@@ -38,3 +38,5 @@ source venv/bin/activate
 ```console
 FLASK_ENV=production python3 -m unittest <FILE-NAME>
 ```
+## Authors
+- This application was written with [Sammy Au](https://github.com/samau3).
