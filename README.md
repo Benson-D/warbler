@@ -27,6 +27,11 @@ python3 -m venv venv
 source venv/bin/activate
 (venv) pip3 install -r requirements.txt
 ```
+**Create Database**
+```console
+(venv) createdb warbler
+(venv) python3 seed.py
+```
 **Start your local server** 
 - Run the second command if Flask environment is not set to development
 ```console
@@ -34,9 +39,15 @@ source venv/bin/activate
 (venv) FLASK_ENV=development flask run
 ```
 ## Testing
-- To run your unittest type in the following command
+- Create Test Database 
 ```console
-FLASK_ENV=production python3 -m unittest <FILE-NAME>
+(venv) createdb warbler-test
+```
+- To run test for a specific file or all files. 
+```console
+(venv) python3 -m unittest <FILE-NAME>
+(venv) python3 -m unittest
 ```
 ## Authors
-- This application was written with [Sammy Au](https://github.com/samau3).
+- Dan Benson
+- [Sammy Au](https://github.com/samau3).
