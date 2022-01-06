@@ -32,7 +32,6 @@ connect_db(app)
 ##############################################################################
 # User signup/login/logout
 
-
 @app.before_request
 def add_user_to_g():
     """If we're logged in, add curr user to Flask global."""
@@ -65,11 +64,8 @@ def do_logout():
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     """Handle user signup.
-
-    Create new user and add to DB. Redirect to home page.
-
-    If form not valid, present form.
-
+    Create new user and add to DB, Redirect to home page
+    If form not valid, present form
     If the there already is a user with that username: flash message
     and re-present form.
     """
@@ -100,7 +96,10 @@ def signup():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    """Handle user login."""
+    """Handle user login.
+    If valid redirect to user account, 
+    If authorization not valid return form
+    """
 
     form = LoginForm()
 
@@ -139,7 +138,6 @@ def logout():
 @app.get('/users')
 def list_users():
     """Page with listing of users.
-
     Can take a 'q' param in querystring to search by that username.
     """
 
@@ -264,9 +262,6 @@ def profile():
 def delete_user():
     """Delete user."""
 
-    # Referential Integrety; delete messages first
-    # CSRF issue; need to also validate
-
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
@@ -278,7 +273,6 @@ def delete_user():
         db.session.commit()
         return redirect("/signup")
     else:
-        # didn't pass CSRF; ignore logout attempt
         raise Unauthorized()
 
 
@@ -331,8 +325,6 @@ def messages_destroy(message_id):
 
     return redirect(f"/users/{g.user.id}")
 
-
-# Liking messages routes
 
 @app.post('/messages/<int:message_id>/like')
 def message_like(message_id):
@@ -400,6 +392,7 @@ def homepage():
 def add_header(response):
     """Add non-caching headers on every request."""
 
-    # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+    
     response.cache_control.no_store = True
     return response
+

@@ -6,7 +6,6 @@ from flask import session
 
 os.environ['DATABASE_URL'] = "postgresql:///warbler_test"
 
-
 app.config['SQLALCHEMY_ECHO'] = False
 app.config['TESTING'] = True
 app.config['WTF_CSRF_ENABLED'] = False
@@ -125,30 +124,3 @@ class UserViewsTestCase(TestCase):
             self.assertTrue(len(User.query.all()), 1)
             self.assertIn('<h1>What\'s Happening?</h1>', html)
 
-# doesn't work, need to refine edit posting
-    # def test_edit_user(self):
-    #     """Test if a user can edit their profile"""
-    #     with app.test_client() as client:
-    #         with client.session_transaction() as sess:
-    #             sess[CURR_USER_KEY] = self.user1_id
-
-    #         # post_data = {"username": "new_test_name",
-    #         #              "email": "test1@email.com",
-    #         #              "image_url": "/static/images/default-pic.png",
-    #         #              "header_url": "",
-    #         #              "bio": "",
-    #         #              "password": "testing1"}
-
-    #         resp = client.post(
-    #             '/users/profile', data={"username": "new_test_name",
-    #                                     "email": "test1@email.com",
-    #                                     "image_url": "/static/images/default-pic.png",
-    #                                     "header_url": "",
-    #                                     "bio": "",
-    #                                     "password": "testing1"},
-    #             follow_redirects=True)
-    #         breakpoint()
-    #         html = resp.get_data(as_text=True)
-
-    #         self.assertIn(
-    #             f'<form method="POST" action="/users/stop-following/{self.user2_id}"', html)

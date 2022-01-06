@@ -91,7 +91,7 @@ class User(db.Model):
     liked_messages = db.relationship(
         "Message",
         secondary="likes",
-        backref="users" #need better backref; message_users_liked?
+        backref="users" 
     )
 
     def __repr__(self):
@@ -115,7 +115,7 @@ class User(db.Model):
         """Is this message already liked by user?"""
 
         found_message_list = [
-            messages for messages in self.liked_messages if messages == message] # don't need to loop over all messages; faster way?
+            messages for messages in self.liked_messages if messages == message] 
         return len(found_message_list) == 1
 
     @classmethod
@@ -187,14 +187,6 @@ class Message(db.Model):
 
     user = db.relationship('User')
 
-    # DIDN'T need this because we ALREADY had a back reference 
-    # liked_users = db.relationship(
-    #     "User",
-    #     secondary="likes",
-    #     backref="messages"
-    # )
-
-
 def connect_db(app):
     """Connect this database to provided Flask app.
 
@@ -203,16 +195,6 @@ def connect_db(app):
 
     db.app = app
     db.init_app(app)
-
-
-# CREATE LIKES:
-# Many to many relationship,
-# Need to keep track of user.id and message.id
-# TWO Primary keys similiar to the Follows table, same user can't like the same post twice, same user can like multiple post, and MESSAGES can be liked by multiple users
-# Need to add a new relationshipt to message AND user.
-# RELATIONSHIP:
-# User has to have a r/t of likes connected to the message id
-# Message has to have a r/t of likes connected by the user id
 
 class Like(db.Model):
     """Connection of likes by warbles users <-> warbles messages"""

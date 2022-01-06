@@ -1,38 +1,21 @@
 """User model tests."""
 
-# run these tests like:
-#
-#    python -m unittest test_user_model.py
-
-
 from app import app
 import os
 from unittest import TestCase
 from sqlalchemy import exc
 from models import db, User, Message, Follows, Like
-# BEFORE we import our app, let's set an environmental variable
-# to use a different database for tests (we need to do this
-# before we import our app, since that will have already
-# connected to the database
+
 
 os.environ['DATABASE_URL'] = "postgresql:///warbler_test"
-
-# Now we can import app
 
 app.config['SQLALCHEMY_ECHO'] = False
 app.config['TESTING'] = True
 
-# Create our tables (we do this here, so we only create the tables
-# once for all tests --- in each test, we'll delete the data
-# and create fresh new clean test data
+
 
 db.drop_all()
 db.create_all()
-
-# need two test user instances
-# place creation of the two instances outside of test class?
-
-# two test cases for validating sign up should try to use an existing username and email
 
 
 class UserModelTestCase(TestCase):
@@ -53,7 +36,6 @@ class UserModelTestCase(TestCase):
                                   "/static/images/default-pic.png"
                                   )
 
-        # breakpoint()
         test_data_2 = User.signup("test_user_2",
                                   "test2@email.com",
                                   "testing2",
@@ -81,7 +63,6 @@ class UserModelTestCase(TestCase):
         db.session.add(u)
         db.session.commit()
 
-        # User should have no messages & no followers
         self.assertEqual(len(u.messages), 0)
         self.assertEqual(len(u.followers), 0)
 
